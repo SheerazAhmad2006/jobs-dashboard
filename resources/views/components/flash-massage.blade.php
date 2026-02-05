@@ -1,0 +1,11 @@
+@if (session()->has('message'))
+    <div
+        x-data="{ show: true }"
+        x-init="setTimeout(() => show = false, 3000)"
+        x-show="show"
+        x-transition
+        class="bg-laravel text-white px-4 py-2 mb-6 fixed top-0 left-1/2 transform -translate-x-1/2 hover:scale-110"
+    >
+        {{ session('message') }}
+    </div>
+@endif
