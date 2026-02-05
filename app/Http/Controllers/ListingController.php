@@ -71,7 +71,7 @@ class ListingController extends Controller
     public function update(Request $request, Listing $listing)
     {
         if ($listing->user_id !== auth()->id()) {
-            abort(403, 'Unauthorized action');
+            abort(403, 'Only owner can edit this listing');
         }
 
         $formFields = $request->validate([
@@ -94,7 +94,7 @@ class ListingController extends Controller
     public function destroy(Listing $listing)
     {
         if ($listing->user_id !== auth()->id()) {
-            abort(403, 'Unauthorized action');
+            abort(403, 'Only owner can delete this listing');
         }
 
         $listing->delete();
