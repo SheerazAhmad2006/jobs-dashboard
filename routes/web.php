@@ -5,16 +5,14 @@ use App\Http\Controllers\ListingController;
 use App\Http\Controllers\UserController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('/test', function () {
     return 'Laravel is working';
 });
 
 // All Listings
-// Route::get('/', [ListingController::class, 'index']);
+Route::get('/', [ListingController::class, 'index']);
 
 // Manage listings (MUST be before {listing})
 Route::get('/listings/manage', [ListingController::class, 'manage'])
