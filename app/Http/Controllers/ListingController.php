@@ -10,14 +10,12 @@ use App\Models\User;
 class ListingController extends Controller
 {
     // Show all listings
-    public function index()
-    {
-        return view('listings.index', [
-            'listings' => Listing::latest()
-                ->filter(request(['tag', 'search']))
-                ->paginate(6)
-        ]);
-    }
+   public function index()
+{
+    return view('listings.index', [
+        'listings' => Listing::latest()->paginate(6)
+    ]);
+}
 
     // Show single listing
      public function show(Listing $listing)
