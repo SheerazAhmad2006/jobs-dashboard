@@ -21,17 +21,20 @@ class Listing extends Model
     ];
 
     public function scopeFilter($query, array $filters)
-    {
-        if ($filters['tag'] ?? false) {
-            $query->where('tags', 'like', '%' . request('tag') . '%');
-        }
-
-        if ($filters['search'] ?? false) {
-            $query->where('title', 'like', '%' . request('search') . '%')
-                ->orWhere('description', 'like', '%' . request('search') . '%')
-                ->orWhere('tags', 'like', '%' . request('search') . '%');
-        }
+{
+    if (!empty($filters['tag'])) {
+        $query->where('tags', 'like', '%' . $filters['tag'] . '%');
     }
+
+    if (!empty($filters['search'])) {
+        $query->where(function ($q) use ($filters) {
+            $q->where('title', 'like', '%' . $filters['search'] . '%')
+              ->orWhere('description', 'like', '%' . $filters['search'] . '%')
+              ->orWhere('tags', 'like', '%' . $filters['search'] . '%');
+        });
+    }
+}
+
 
     public function user()
     {
